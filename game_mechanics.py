@@ -2,15 +2,20 @@
 from gesture_list import GestureList
 import random
 
+
+game_gestures = GestureList()
+game_gestures.build_list()
+
+
 def begin_game():
-    game_gestures = GestureList()
-    game_gestures.build_list()
 
     opponent_type = determine_opponent()
 
     counter = 1  # 5 turns
     winner_exists = False
-    while counter <= 5 or winner_exists:
+    player_one_wins = 0
+    player_two_wins = 0
+    while counter <= 5 and not winner_exists:
         print(f'===== Turn {counter} =====')
         player_one_choice = select_option(game_gestures.gesture_name_list, 1)
         print(f'Player 1, your choice was {player_one_choice} \n')
@@ -20,7 +25,16 @@ def begin_game():
         else:
             player_two_choice = random_selection(game_gestures.gesture_name_list)
             print(f'The computer chose: {player_two_choice}')
+
         # track user wins and conditionally set winner_exists
+        turn_winner = check_turn_winner(player_one_choice, player_two_choice)
+        if turn_winner == 1:
+            player_one_wins += 1
+        else:
+            player_two_wins += 1
+        if player_one_wins == 3 or player_two_wins == 3:
+            winner_exists = True
+
         counter += 1
 
 
@@ -36,20 +50,25 @@ def determine_opponent():
     return opponent_type
 
 
-def select_option(game_gestures, player_number):
+def select_option(gestures, player_number):
     valid_entry = False
-    print(f'The Gesture list is: {game_gestures}')
+    print(f'The Gesture list is: {gestures}')
     while not valid_entry:
         gesture_choice = input(f'Player {player_number}, which gesture do you choose? ')
         try:
-            game_gestures.index(gesture_choice)
+            gestures.index(gesture_choice)
             valid_entry = True
         except ValueError:
             print('That is not a valid option. Please try again.')
     return gesture_choice
 
 
-def random_selection(game_gestures):
+def random_selection(gestures):
     index = random.randint(1, 5)
-    gesture_choice = (game_gestures[index])
+    gesture_choice = (gestures[index])
     return gesture_choice
+
+
+def check_turn_winner(player_one_choice, player_two_choice):
+
+    return 1
