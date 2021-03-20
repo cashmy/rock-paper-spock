@@ -17,26 +17,27 @@ class GestureList(Gestures):
 
     def build_list(self):
         # Instantiate all gestures and their relationships to other gestures
-        # Indexes 0 and 1 are wins against and 2 and 3 are losses against
+        # Indexes 0 and 1 are wins and 2 and 3 are losses
+        # eg: Rock crushes Lizard and Spock, Spock and Paper smash/cover rock
         self.gesture_obj_list.append(Gestures('Rock', 0,
                                               ['Lizard', 'Scissors', 'Spock', 'Paper'],
-                                              ['crushes', 'crushes']))
+                                              ['crushes', 'crushes', 'vaporizes', 'covers']))
 
         self.gesture_obj_list.append(Gestures('Paper', 1,
                                               ['Rock', 'Spock', 'Lizard', 'Scissors'],
-                                              ['covers', 'disproves']))
+                                              ['covers', 'disproves', 'eats', 'cuts']))
 
         self.gesture_obj_list.append(Gestures('Scissors', 2,
                                               ['Lizard', 'Paper', 'Rock', 'Spock'],
-                                              ['decapitates', 'cuts']))
+                                              ['decapitates', 'cuts', 'crushes', 'smashes']))
 
         self.gesture_obj_list.append(Gestures('Lizard', 3,
                                               ['Paper', 'Spock', 'Rock', 'Scissors'],
-                                              ['eats', 'poisons']))
+                                              ['eats', 'poisons', 'crushes', 'decapitates']))
 
         self.gesture_obj_list.append(Gestures('Spock', 4,
                                               ['Rock', 'Scissors', 'Lizard', 'Paper'],
-                                              ['vaporizes', 'smashes']))
+                                              ['vaporizes', 'smashes', '', '']))
         # Now build the name list
         for gesture in self.gesture_obj_list:
             self.gesture_name_list.append(gesture.gesture_name)
@@ -52,3 +53,17 @@ class GestureList(Gestures):
             if a_gesture in gesture.gesture_name:
                 print(f'The record for {a_gesture} was found with a tracked index of {gesture.list_index}')
         return self
+
+    def compare_gesture(self, player1_gesture, player2_gesture):
+        turn_winner = 0
+        for gesture in self.gesture_obj_list:
+            if player1_gesture in gesture.gesture_name:
+                # Find position of player2_gesture
+                index = gesture.gesture_oppose.index(player2_gesture)
+                if index == 0 or index == 1:
+                    print(f'{player1_gesture} {gesture.winning_actions[index]} {player2_gesture}')
+                    turn_winner = 1
+                else:
+                    print(f'{player2_gesture} {gesture.winning_actions[index]} {player1_gesture}')
+                    turn_winner = 2
+        return turn_winner

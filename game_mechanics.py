@@ -70,5 +70,5 @@ def random_selection(gestures):
 
 
 def check_turn_winner(player_one_choice, player_two_choice):
-
-    return 1
+    turn_winner = game_gestures.compare_gesture(player_one_choice,player_two_choice)
+    return turn_winner
