@@ -1,6 +1,6 @@
 # imports
 from gesture_list import GestureList
-
+import random
 
 def begin_game():
     game_gestures = GestureList()
@@ -18,8 +18,8 @@ def begin_game():
             player_two_choice = select_option(game_gestures.gesture_name_list, 2)
             print(f'Player 2, your choice was {player_two_choice} \n')
         else:
-            # random selection
-            print(f'The computer chose: Rock')
+            player_two_choice = random_selection(game_gestures.gesture_name_list)
+            print(f'The computer chose: {player_two_choice}')
         # track user wins and conditionally set winner_exists
         counter += 1
 
@@ -48,3 +48,8 @@ def select_option(game_gestures, player_number):
             print('That is not a valid option. Please try again.')
     return gesture_choice
 
+
+def random_selection(game_gestures):
+    index = random.randint(1, 5)
+    gesture_choice = (game_gestures[index])
+    return gesture_choice
