@@ -5,8 +5,13 @@ import gestures
 from gestures import Gestures
 
 
-class GestureList:
-    def __init__(self):
+class GestureList(Gestures):
+    def __init__(self, gesture_name='', list_index=0, gesture_array=None, winning_actions=None):
+        super().__init__(gesture_name, list_index, gesture_array, winning_actions)
+        if gesture_array is None:
+            gesture_array = []
+        if winning_actions is None:
+            winning_actions = []
         self.gesture_name_list = []
         self.gesture_obj_list = []
 
@@ -14,8 +19,8 @@ class GestureList:
         # Instantiate all gestures and their relationships to other gestures
         # Indexes 0 and 1 are wins against and 2 and 3 are losses against
         self.gesture_obj_list.append(Gestures('Rock', 0,
-                                           ['Lizard', 'Scissors', 'Spock', 'Paper'],
-                                           ['crushes', 'crushes']))
+                                              ['Lizard', 'Scissors', 'Spock', 'Paper'],
+                                              ['crushes', 'crushes']))
 
         self.gesture_obj_list.append(Gestures('Paper', 1,
                                               ['Rock', 'Spock', 'Lizard', 'Scissors'],
