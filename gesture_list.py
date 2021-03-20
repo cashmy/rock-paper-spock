@@ -56,14 +56,18 @@ class GestureList(Gestures):
 
     def compare_gesture(self, player1_gesture, player2_gesture):
         turn_winner = 0
+        if player1_gesture == player2_gesture:
+            # Its a tie
+            print(f'{player1_gesture} ties with {player2_gesture}. No winner.\n')
+            return turn_winner
         for gesture in self.gesture_obj_list:
             if player1_gesture in gesture.gesture_name:
                 # Find position of player2_gesture
                 index = gesture.gesture_oppose.index(player2_gesture)
                 if index == 0 or index == 1:
-                    print(f'{player1_gesture} {gesture.winning_actions[index]} {player2_gesture}')
+                    print(f'{player1_gesture} {gesture.winning_actions[index]} {player2_gesture}\n')
                     turn_winner = 1
                 else:
-                    print(f'{player2_gesture} {gesture.winning_actions[index]} {player1_gesture}')
+                    print(f'{player2_gesture} {gesture.winning_actions[index]} {player1_gesture}\n')
                     turn_winner = 2
         return turn_winner

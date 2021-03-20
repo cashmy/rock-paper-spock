@@ -36,6 +36,7 @@ def begin_game():
             winner_exists = True
 
         counter += 1
+    declare_winner(player_one_wins,player_two_wins,opponent_type)
 
 
 def determine_opponent():
@@ -72,3 +73,16 @@ def random_selection(gestures):
 def check_turn_winner(player_one_choice, player_two_choice):
     turn_winner = game_gestures.compare_gesture(player_one_choice,player_two_choice)
     return turn_winner
+
+
+def declare_winner(player_one_wins, player_two_wins, opponent_type):
+    print('\n ============================ ')
+    print('        The winner is :       ')
+    if player_one_wins > player_two_wins:
+        winner_string = 'Player One'
+    elif opponent_type == '1':
+        winner_string = 'Player Two'
+    else:
+        winner_string = 'Computer'
+    winner_string = winner_string.center(30)
+    print(f'{winner_string}')
