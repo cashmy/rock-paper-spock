@@ -65,7 +65,7 @@ def select_option(gestures, player_number):
 
 
 def random_selection(gestures):
-    index = random.randint(1, 5)
+    index = random.randint(0, 4)
     gesture_choice = (gestures[index])
     return gesture_choice
 
