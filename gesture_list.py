@@ -1,5 +1,7 @@
 # Import Gestures
 # this will allow us to use/"inherit" the attributes in gestures
+# TECHNICALLY This Inheritance is NOT NEEDED. (An exercise in implementing inheritance.)
+# I also did a refactor Player(parent) - Human/computer player (child)
 # in order to build list of gesture objects
 import gestures
 from gestures import Gestures

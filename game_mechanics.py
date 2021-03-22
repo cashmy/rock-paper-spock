@@ -8,19 +8,19 @@ game_gestures.build_list()
 
 
 def begin_game():
+    # Determine opponent type
     opponent_type = determine_opponent()
-
+    # Instantiate players
     player_one = HumanPlayer()
-
     if opponent_type == '1':
         player_two = HumanPlayer('', 2)
     else:
         player_two = ComputerPlayer()
-
+    # Setup Tracking variables
     counter = 1  # 5 turns
     winner_exists = False
-
     max_counter = 5
+    # Process game turns
     while counter <= max_counter and not winner_exists:
         print(f'===== Turn {counter} =====')
         player_one_choice = player_one.method_of_play(game_gestures.gesture_name_list)
@@ -33,11 +33,12 @@ def begin_game():
         else:
             # increment max counter to accommodate for tie rounds
             max_counter += 1
-
+        # Check for end of game
         if player_one.wins == 3 or player_two.wins == 3:
             winner_exists = True
-
+        # increment counter
         counter += 1
+    # Declare/show winner
     declare_winner(player_one, player_two, opponent_type)
 
 
