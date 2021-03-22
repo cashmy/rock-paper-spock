@@ -19,22 +19,12 @@ def begin_game():
 
     counter = 1  # 5 turns
     winner_exists = False
-    # player_one_wins = 0
-    # player_two_wins = 0
+
     max_counter = 5
     while counter <= max_counter and not winner_exists:
         print(f'===== Turn {counter} =====')
         player_one_choice = player_one.method_of_play(game_gestures.gesture_name_list)
-        # player_one_choice = select_option(game_gestures.gesture_name_list, 1)
         player_two_choice = player_two.method_of_play(game_gestures.gesture_name_list)
-        # if opponent_type == '1':  # Human vs Human
-        #     player_two_choice = select_option(game_gestures.gesture_name_list, 2)
-        #     print(f'Player 2, your choice was {player_two_choice} \n')
-        # else:
-        #     player_two_choice = random_selection(game_gestures.gesture_name_list)
-        #     print(f'The computer chose: {player_two_choice}')
-
-        # track user wins and conditionally set winner_exists
         turn_winner = check_turn_winner(player_one_choice, player_two_choice)
         if turn_winner == 1:
             player_one.wins += 1
@@ -64,26 +54,6 @@ def determine_opponent():
         else:
             print('\nI did not understand your entry. Please try again.')
     return opponent_type
-
-
-# def select_option(gestures, player_number):
-#     gesture_choice = ''
-#     valid_entry = False
-#     print(f'The Gesture list is: {gestures}')
-#     while not valid_entry:
-#         gesture_choice = input(f'Player {player_number}, which gesture do you choose? ')
-#         try:
-#             gestures.index(gesture_choice)
-#             valid_entry = True
-#         except ValueError:
-#             print('That is not a valid option. Please try again.')
-#     return gesture_choice
-#
-#
-# def random_selection(gestures):
-#     index = random.randint(0, 4)
-#     gesture_choice = (gestures[index])
-#     return gesture_choice
 
 
 def check_turn_winner(player_one_choice, player_two_choice):
