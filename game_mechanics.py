@@ -2,20 +2,19 @@
 from gesture_list import GestureList
 import random
 
-
 game_gestures = GestureList()
 game_gestures.build_list()
 
 
 def begin_game():
-
     opponent_type = determine_opponent()
 
     counter = 1  # 5 turns
     winner_exists = False
     player_one_wins = 0
     player_two_wins = 0
-    while counter <= 5 and not winner_exists:
+    max_counter = 5
+    while counter <= max_counter and not winner_exists:
         print(f'===== Turn {counter} =====')
         player_one_choice = select_option(game_gestures.gesture_name_list, 1)
         print(f'Player 1, your choice was {player_one_choice} \n')
@@ -30,16 +29,21 @@ def begin_game():
         turn_winner = check_turn_winner(player_one_choice, player_two_choice)
         if turn_winner == 1:
             player_one_wins += 1
-        else:
+        elif turn_winner == 2:
             player_two_wins += 1
+        else:
+            # increment max counter to accommodate for tie rounds
+            max_counter += 1
+
         if player_one_wins == 3 or player_two_wins == 3:
             winner_exists = True
 
         counter += 1
-    declare_winner(player_one_wins,player_two_wins,opponent_type)
+    declare_winner(player_one_wins, player_two_wins, opponent_type)
 
 
 def determine_opponent():
+    opponent_type = ''
     valid_entry = False
     while not valid_entry:
         print(' 1) Human vs. Human  or  2) Human vs. AI')
@@ -52,6 +56,7 @@ def determine_opponent():
 
 
 def select_option(gestures, player_number):
+    gesture_choice = ''
     valid_entry = False
     print(f'The Gesture list is: {gestures}')
     while not valid_entry:
@@ -71,7 +76,7 @@ def random_selection(gestures):
 
 
 def check_turn_winner(player_one_choice, player_two_choice):
-    turn_winner = game_gestures.compare_gesture(player_one_choice,player_two_choice)
+    turn_winner = game_gestures.compare_gesture(player_one_choice, player_two_choice)
     return turn_winner
 
 
